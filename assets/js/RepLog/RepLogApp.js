@@ -25,6 +25,13 @@ export default class RepLogApp extends Component {
         this.setState({highlightedRowId: repLogId})
     }
 
+    handleNewItemSubmit(itemName, reps) {
+        console.log('Todo: Handle this new data');
+        console.log(itemName,reps);
+
+
+    }
+
     render() {
 
         return(
@@ -32,6 +39,7 @@ export default class RepLogApp extends Component {
                 {...this.props}
                 {...this.state}
                 onRowClick        = {this.handleRowClick}
+                onNewItemSubmit = {this.handleNewItemSubmit}
             />
             )
     }
