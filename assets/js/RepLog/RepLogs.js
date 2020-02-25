@@ -26,7 +26,9 @@ export default function RepLogs(props) {
             numberOfHearts,
             onHeartChange,
             onDeleteRepLog,
-            isLoaded
+            isLoaded,
+            isSavingNewRepLog,
+            successMessage
             } = props
 
     let heart = '';
@@ -40,6 +42,12 @@ export default function RepLogs(props) {
             <h2>
                 Lift History {heart}
             </h2>
+
+            {successMessage &&(
+                <div className="alert alert-success text-center">
+                    {successMessage}
+                </div>
+            )}
 
             <input type="range"
                    value={numberOfHearts}
@@ -64,6 +72,7 @@ export default function RepLogs(props) {
                     repLogs ={repLogs}
                     onDeleteRepLog = {onDeleteRepLog}
                     isLoaded = {isLoaded}
+                    isSavingNewRepLog = {isSavingNewRepLog}
                 />
 
                 <tfoot>
@@ -95,5 +104,7 @@ RepLogs.propTypes = {
     numberOfHearts: propTypes.number.isRequired,
     onHeartChange : propTypes.func.isRequired,
     onDeleteRepLog: propTypes.func.isRequired,
-    isLoaded: propTypes.bool.isRequired
+    isLoaded: propTypes.bool.isRequired,
+    isSavingNewRepLog: propTypes.bool.isRequired,
+    successMessage: propTypes.string.isRequired
 }
