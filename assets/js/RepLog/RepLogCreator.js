@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import propTypes from 'prop-types';
-
+import Button from '../Components/Button';
 
 export default class RepLogCreator extends Component {
     constructor(props) {
@@ -97,7 +97,9 @@ export default class RepLogCreator extends Component {
                 </div>
                 {' '}
 
-                <button type="submit" className="btn btn-primary">I Lifted it!</button>
+                <Button type="submit" className="btn-primary" >
+                    I Lifted it! <span className="fa fa-plus-circle"></span>
+                </Button>
             </form>
         )
     }
