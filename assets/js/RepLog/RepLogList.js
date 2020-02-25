@@ -30,6 +30,9 @@ export default function RepLogList(props) {
                             key={repLog.id}
                             className={highlightedRowId === repLog.id ? 'info' : ''}
                             onClick={() => onRowClick(repLog.id)}
+                            style={{
+
+                            }}
                         >
                             <td>{repLog.itemLabel}</td>
                             <td>{repLog.reps}</td>

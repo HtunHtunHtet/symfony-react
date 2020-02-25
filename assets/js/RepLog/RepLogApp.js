@@ -10,8 +10,6 @@ export default class RepLogApp extends Component {
     constructor(props) {
         super (props);
 
-
-
         this.state =  {
             highlightedRowId :null,
             repLogs : [],
@@ -20,6 +18,8 @@ export default class RepLogApp extends Component {
             isSavingNewRepLog: false,
             successMessage: ''
         }
+
+        this.successMessageTimeoutHandle =0;
 
         this.handleRowClick = this.handleRowClick.bind(this)
         this.handleAddRepLog= this.handleAddRepLog.bind(this)
@@ -35,6 +35,10 @@ export default class RepLogApp extends Component {
                     isLoaded : true
               })
             })
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.successMessageTimeoutHandle);
     }
 
     handleRowClick (repLogId ) {
@@ -59,12 +63,32 @@ export default class RepLogApp extends Component {
                    const newRepLogs =[...prevState.repLogs, repLog];
                    return {
                        repLogs: newRepLogs,
-                       isSavingNewRepLog : false,
-                       successMessage: 'Rep Log Saved!'
+                       isSavingNewRepLog : false
                    }
-               })
+               });
+
+               this.setSuccessMessage('Rep Log Saved!');
             })
     }
+
+    setSuccessMessage(message) {
+        this.setState({
+            successMessage : message
+        })
+
+        clearTimeout(this.successMessageTimeoutHandle);
+        this.successMessageTimeoutHandle = setTimeout(() => {
+            setTimeout(() => {
+                this.setState({
+                    successMessage : ''
+                });
+
+                this.successMessageTimeoutHandle = 0;
+            },3000)
+        })
+
+    }
+
 
     handleHeartChange(heartCount) {
         this.setState({
@@ -76,13 +100,33 @@ export default class RepLogApp extends Component {
         //remove the rep log without mutating state
         //filter return a new array
 
-        deleteRepLog(id);
 
-        this.setState ((prevState) => {
+        this.setState((prevState) => {
             return {
-                repLogs: prevState.repLogs.filter(repLog => repLog.id !== id)
+                repLogs: prevState.repLogs.map(repLog => {
+                    if(repLog.id !== id) {
+                        return repLog;
+                    }
+
+                    return Object.assign({}, repLog, {isDeleting: true})
+                })
             }
         })
+
+
+        deleteRepLog(id)
+            .then(() => {
+
+                this.setState ((prevState) => {
+                    return {
+                        repLogs: prevState.repLogs.filter(repLog => repLog.id !== id)
+                    }
+                });
+
+
+
+                this.setSuccessMessage('Item was unlifted')
+            });
 
     }
 
