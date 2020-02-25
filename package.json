@@ -26,6 +26,7 @@
     "build": "encore production"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24"
   }
 }
