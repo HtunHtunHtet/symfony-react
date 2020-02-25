@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import RepLogApp from './RepLog/RepLogApp';
 
-const shouldShowHeart = true;
+const shouldShowHeart = false;
 
 render(
     <div>
-        <RepLogApp withHeart = {shouldShowHeart}/>
+        <RepLogApp
+            {...window.REP_LOG_APP_PROPS}
+            withHeart = {shouldShowHeart}/>
     </div>,
     document.getElementById('lift-stuff-app')
 

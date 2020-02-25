@@ -22,10 +22,10 @@ export default class RepLogApp extends Component {
 
         this.successMessageTimeoutHandle =0;
 
-        this.handleRowClick = this.handleRowClick.bind(this)
-        this.handleAddRepLog= this.handleAddRepLog.bind(this)
-        this.handleHeartChange = this.handleHeartChange.bind(this)
-        this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this)
+        this.handleRowClick = this.handleRowClick.bind(this);
+        this.handleAddRepLog= this.handleAddRepLog.bind(this);
+        this.handleHeartChange = this.handleHeartChange.bind(this);
+        this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this);
     }
 
     componentDidMount() {
@@ -170,6 +170,11 @@ export default class RepLogApp extends Component {
 }
 
 RepLogApp.propTypes = {
-    highlightedRowId : propTypes.any,
-    withHeart : propTypes.bool
+    //highlightedRowId : propTypes.any,
+    withHeart : propTypes.bool,
+    itemOptions : propTypes.array
+}
+
+RepLogApp.defalutProps = {
+    itemOptions: []
 }
