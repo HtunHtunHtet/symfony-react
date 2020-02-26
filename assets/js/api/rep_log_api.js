@@ -1,7 +1,17 @@
 function fetchJson(url, options) {
+
+    let headers= {'Content-Type' : 'application/json'};
+
+    if (options && options.headers) {
+        headers = {...options.headers, ...headers};
+
+        delete options.headers;
+    }
+
     //Object.assign is equal to array.merge in javascript
     return fetch(url, Object.assign({
         credentials: 'same-origin',
+        headers: headers
     }, options))
         .then(checkStatus)
 
@@ -44,10 +54,7 @@ export function deleteRepLog(id) {
 export function createRepLog(repLog) {
     return fetchJson('/reps', {
         method: 'POST',
-        body : JSON.stringify(repLog),
-        headers: {
-            'Content-Type' : 'application/json'
-        }
+        body : JSON.stringify(repLog)
     })
 }
 
